@@ -45,7 +45,7 @@ check_message("Hey, are we meeting tomorrow?")
 check_message("FREE prize! Call now to claim your reward!")
 import pickle
 
-# Сохраняем модель и векторизатор
+
 with open('spam_model.pkl', 'wb') as f:
     pickle.dump(model, f)
 

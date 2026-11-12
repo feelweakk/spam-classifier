@@ -1,14 +1,14 @@
-"""Проверка сообщений обученной моделью.
+"""Check messages with the trained model.
 
-Запуск:
+Run:
     python predict.py "Congratulations! You won a free iPhone!"
-    python predict.py            # интерактивный режим
+    python predict.py            # interactive mode
 """
 
 import pickle
 import sys
 
-# Чтобы эмодзи и кириллица нормально печатались в консоли Windows
+# Make emoji print correctly in the Windows console
 sys.stdout.reconfigure(encoding="utf-8")
 
 with open("spam_model.pkl", "rb") as f:
@@ -18,21 +18,21 @@ with open("vectorizer.pkl", "rb") as f:
 
 
 def check_message(text: str) -> bool:
-    """Возвращает True, если сообщение — спам."""
+    """Returns True if the message is spam."""
     return model.predict(vectorizer.transform([text]))[0] == 1
 
 
 def print_result(text: str):
     if check_message(text):
-        print(f"🚨 СПАМ: {text}")
+        print(f"🚨 SPAM: {text}")
     else:
-        print(f"✅ НЕ СПАМ: {text}")
+        print(f"✅ NOT SPAM: {text}")
 
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         print_result(" ".join(sys.argv[1:]))
     else:
-        print("Введи сообщение (пустая строка — выход):")
+        print("Type a message (empty line to quit):")
         while text := input("> ").strip():
             print_result(text)
